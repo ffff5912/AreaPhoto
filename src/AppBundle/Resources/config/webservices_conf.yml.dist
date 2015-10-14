@@ -1,0 +1,7 @@
+parameters:
+    instagram:
+        access_token: ~
+        client_id: ~
+        client_secret: ~
+        redirect_url: ~
+        base_url: ~

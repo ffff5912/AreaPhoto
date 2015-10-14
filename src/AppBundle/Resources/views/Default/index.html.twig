@@ -1,0 +1,32 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block body %}
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    AreaPhoto
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="map-embed">
+            <div id="map-canvas"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="photo_box"></div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var media_store_url = "{{ path('get_media_location') }}";
+        var token = "{{ default_csrf_token() }}";
+    </script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj7Q79EBBC6RrHpGixxrFTUThs94sxUwA"></script>
+    <script src="{{ asset('bundles/app/js/build/bundle.js') }}"></script>
+{% endblock %}

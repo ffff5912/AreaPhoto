@@ -1,0 +1,4 @@
+parameters:
+    location:
+        recent: https://api.instagram.com/v1/locations/%s/media/recent
+        search: https://api.instagram.com/v1/locations/search

@@ -1,0 +1,22 @@
+{
+  "name": "areaphoto",
+  "version": "0.0.1",
+  "repository": {
+      "private": true
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "scripts": {
+    "build": "browserify --transform babelify src/AppBundle/Resources/public/js/main.js --outfile src/AppBundle/Resources/public/js/build/bundle.js",
+    "start": "npm rum build"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.13.3",
+    "less": "~1.7",
+    "browserify": "^10.2.1",
+    "babelify": "^6.1.1"
+  }
+}

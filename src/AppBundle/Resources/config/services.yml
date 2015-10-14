@@ -1,0 +1,33 @@
+imports:
+    - { resource: webservices_conf.yml }
+    - { resource: end_points.yml }
+
+services:
+    client:
+        class: Guzzle\Http\Client
+        arguments: []
+    app.storage.cache.media.class:
+        class: AppBundle\Storage\Cache\Media
+        arguments: [ @snc_redis.default ]
+    app.provider.factory:
+        class: AppBundle\Providers\ProviderFactory
+        arguments: [ @client ]
+    app.provider.instagram.class:
+        class: AppBundle\Providers\InstagramProvider
+        factory_service: app.provider.factory
+        factory_method: createInstagramProvider
+        arguments: [ %instagram% ]
+    app.service.location:
+        class: AppBundle\Services\Location
+        arguments: [ @app.provider.instagram.class, %location%, @app.storage.cache.media.class ]
+    app.twig.csrf_twig_extension:
+        class: AppBundle\Twig\CsrfTwigExtension
+        arguments: ["@form.csrf_provider"]
+        tags:
+            - { name: twig.extension }
+#    app.event_listener.api_request:
+#        class: AppBundle\ApiRequestEvent
+#        arguments: [ "@service.container" ]
+#        tags:
+#            - { name: karnel.event_listener, event: request, method: onRequest}
+#            - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate }

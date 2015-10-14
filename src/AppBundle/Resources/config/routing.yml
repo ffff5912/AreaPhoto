@@ -1,0 +1,6 @@
+app_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+media:
+    resource: "@AppBundle/Controller/MediaController.php"
+    type: rest
