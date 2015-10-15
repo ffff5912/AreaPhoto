@@ -14,7 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
  * @Cache(maxage="86400")
  */
 
-class MediaController extends FOSRestController implements ClassResourceInterface
+class MediaController extends FOSRestController implements ClassResourceInterface, TokenAuthenticatedController
 {
     /**
      * TODO: validation, response
@@ -23,10 +23,6 @@ class MediaController extends FOSRestController implements ClassResourceInterfac
      */
     public function getLocationAction(Request $request)
     {
-        $token = $request->headers->get('X-CSRF-Token');
-        if (false === $this->get('form.csrf_provider')->isCsrfTokenValid('default', $token)) {
-            throw new AccessDeniedHttpException('CSRF token is invalid.');
-        }
         $location = $this->get('app.service.location');
         $media = $location->execute($request->query->get('lat'), $request->query->get('lng'));
         if (0 === count($media)) {

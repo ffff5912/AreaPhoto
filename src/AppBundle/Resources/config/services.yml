@@ -22,12 +22,11 @@ services:
         arguments: [ @app.provider.instagram.class, %location%, @app.storage.cache.media.class ]
     app.twig.csrf_twig_extension:
         class: AppBundle\Twig\CsrfTwigExtension
-        arguments: ["@form.csrf_provider"]
+        arguments: [ @form.csrf_provider ]
         tags:
             - { name: twig.extension }
-#    app.event_listener.api_request:
-#        class: AppBundle\ApiRequestEvent
-#        arguments: [ "@service.container" ]
-#        tags:
-#            - { name: karnel.event_listener, event: request, method: onRequest}
-#            - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate }
+    app.event_listener.token_listener:
+        class: AppBundle\EventListener\TokenListener
+        arguments: [ @form.csrf_provider ]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
