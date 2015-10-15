@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "browserify --transform babelify src/AppBundle/Resources/public/js/main.js --outfile src/AppBundle/Resources/public/js/build/bundle.js",
-    "start": "npm rum build"
+    "start": "npm run build"
   },
   "license": "MIT",
   "dependencies": {
