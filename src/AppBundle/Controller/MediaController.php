@@ -9,6 +9,8 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use AppBundle\Form\LocationType;
+use AppBundle\Entity\Location;
 
 /**
  * @Cache(maxage="86400")
@@ -16,17 +18,25 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class MediaController extends FOSRestController implements ClassResourceInterface, TokenAuthenticatedController
 {
+
     /**
-     * TODO: validation, response
-     * @param  string $location_id
-     * @return
+     *
+     * @param  Request $request
+     * @return json|NotFoundHttpException
      */
     public function getLocationAction(Request $request)
     {
-        $location = $this->get('app.service.location');
-        $media = $location->execute($request->query->get('lat'), $request->query->get('lng'));
+        $location = new Location();
+        $form = $this->createForm(new LocationType(), $location, ['method' => 'GET', 'csrf_protection' => false]);
+        $form->handleRequest($request);
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        $location_service = $this->get('app.service.location');
+        $media = $location_service->execute($location->getLat(), $location->getLng());
         if (0 === count($media)) {
-            throw new NotFoundHttpException(sprintf('The resource lat:\'%s\' lng:\'%s\' was not found.', $request->query->get('lat'), $request->query->get('lng')));
+            throw new NotFoundHttpException(sprintf('The resource lat:\'%s\' lng:\'%s\' was not found.', $location->getLat(), $location->getLng()));
         }
         $view = $this->view($media, 200, $this->getResponseHeader());
 
