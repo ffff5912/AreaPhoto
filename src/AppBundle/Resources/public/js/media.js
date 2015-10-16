@@ -4,7 +4,7 @@ var Media = React.createClass({
     render: function() {
         var rows = this.props.media.map(function(data) {
             return data.map(function (value) {
-                if (typeof value.caption.text === 'undefined') {
+                if (typeof value.caption === 'undefined') {
                     value.caption.text = '';
                 }
                 return (
