@@ -8,7 +8,7 @@ use Guzzle\Common\Exception\RuntimeException;
 use AppBundle\Providers\ProviderInterface;
 use AppBundle\Storage\StorageInterface;
 
-class Location implements WebServiceInterface
+class Location implements MediaServiceInterface
 {
     private $instagram_provider;
     private $end_points;
