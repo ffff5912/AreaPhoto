@@ -8,8 +8,8 @@ var MediaStore = (function() {
     MediaStore.prototype.find = function(data) {
         var self = this;
         data.query = {
-            "appbundle_location[lat]": data.latLng.lat(),
-            "appbundle_location[lng]": data.latLng.lng(),
+            lat: data.latLng.lat(),
+            lng: data.latLng.lng(),
         };
         $.ajax({
             url: self.url,

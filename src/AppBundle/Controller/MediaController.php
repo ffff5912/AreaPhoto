@@ -27,7 +27,7 @@ class MediaController extends FOSRestController implements ClassResourceInterfac
     public function getLocationAction(Request $request)
     {
         $location = new Location();
-        $form = $this->createForm(new LocationType(), $location, ['method' => 'GET', 'csrf_protection' => false]);
+        $form = $this->get('form.factory')->createNamed('', new LocationType(), $location, ['method' => 'GET', 'csrf_protection' => false]);
         $form->handleRequest($request);
         if (!$form->isValid()) {
             return $form;
