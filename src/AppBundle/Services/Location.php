@@ -3,8 +3,7 @@
 namespace AppBundle\Services;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Guzzle\Http\Exception\HttpException;
-use Guzzle\Common\Exception\RuntimeException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use AppBundle\Providers\ProviderInterface;
 use AppBundle\Storage\StorageInterface;
 
@@ -35,7 +34,7 @@ class Location implements MediaServiceInterface
 
             return $media;
         } catch (HttpException $e) {
-            throw new RuntimeException(sprintf('The HttpException. BAD REQUEST'));
+            throw new HttpException($e->getCode(), sprintf('The HttpException. BAD REQUEST'));
         }
     }
 
