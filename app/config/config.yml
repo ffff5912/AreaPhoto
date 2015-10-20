@@ -116,7 +116,11 @@ snc_redis:
         default:
             type: predis
             alias: default
-            dsn: redis://localhost
+            dsn:
+                - redis://localhost?alias=master
+                - redis://localhost:16379?alias=slave1
+            options:
+                replication: true
     #    doctrine:
     #        type: predis
     #        alias: doctrine
