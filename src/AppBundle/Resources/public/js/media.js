@@ -5,7 +5,7 @@ var Media = React.createClass({
         var rows = this.props.media.map(function(data) {
             return data.map(function (value) {
                 if (typeof value.caption === 'undefined') {
-                    value.caption.text = '';
+                    value.caption = {'text': ''};
                 }
                 return (
                     <div className="visible-*-inline-block col-md-3">
