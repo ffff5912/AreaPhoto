@@ -1,6 +1,7 @@
 var map = require('./map.js');
 var React = require('react');
 var Media = require('./media.js');
+var Area = require('./area.js');
 
 map.media_store.url = media_store_url;
 map.media_store.token = token;
@@ -25,6 +26,7 @@ var Main = React.createClass({
     render: function() {
         return (
             <div>
+                <Area media={this.state.media} />
                 <Media media={this.state.media} />
             </div>
         );

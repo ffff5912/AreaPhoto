@@ -1,23 +1,39 @@
 var React = require('react');
 
-function getArea() {
-    return function (location) {
-        location.reduce(function(area, value) {
-            area[value.id] = value.location.name;
-        }).filter(function(id, index, self) {
-            return self.indexOf(id) === index;
-        });
-    }
+function hasValues(value) {
+    return value.length > 0;
 }
 
+function createLocation(Location) {
+    return function(location) {
+        return new Location(location[0].location.id, location[0].location.name)
+    };
+}
+
+var Location = (function(){
+    function Location(id, name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    return Location;
+})();
+
 var Area = React.createClass({
-    extract: function () {
-        return this.props.media.filter(function(value) {
-            return value.length > 0;
-        }).map(getArea);
+    extract: function (media) {
+        return media.filter(hasValues).map(createLocation(Location));
     },
     render: function () {
-
+        var rows = this.extract(this.props.media).map(function(location) {
+            return (
+                <p>{location.name}</p>
+            )
+        });
+        return (
+            <div>
+                {rows}
+            </div>
+        )
     }
 });
 
