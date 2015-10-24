@@ -16,7 +16,7 @@ var Media = React.createClass({
             })
         });
         return (
-            <div className="row center-block">
+            <div className="row">
                 {rows}
             </div>
         );
