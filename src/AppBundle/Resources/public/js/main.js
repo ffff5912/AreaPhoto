@@ -1,8 +1,16 @@
-var map = require('./map.js');
+var Map = require('./map.js');
 var React = require('react');
 var Media = require('./media.js');
 var Area = require('./area.js');
 var Loading = require('./loading.js');
+var EventEmitter = require('./event_emitter.js');
+var MapAction = require('./actions/map_action.js');
+var MediaStore = require('./stores/media_store.js');
+
+var event_emitter = new EventEmitter();
+var media_store = new MediaStore(event_emitter);
+var action = new MapAction(event_emitter);
+var map = new Map(action, media_store);
 
 map.media_store.url = media_store_url;
 map.media_store.token = token;
@@ -35,7 +43,7 @@ var Main = React.createClass({
         return (
             <div>
                 <Loading loading={this.state.loading} />
-                <Area media={this.state.media} />
+                <Area media={this.state.media} setMedia={this.setMedia}/>
                 <Media media={this.state.media} />
             </div>
         );
