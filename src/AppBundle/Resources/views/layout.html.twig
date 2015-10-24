@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
+    {% stylesheets '@AppBundle/Resources/public/less/*' filter='cssrewrite' %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="all">
+    {% endstylesheets %}
     <link href="{{ asset('css/bootstrap.css') }}" media="screen" rel="stylesheet">
-    <link href="{{ asset('bundles/app/css/area_photo.css') }}" rel="stylesheet">
     {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
 {% endblock %}
