@@ -26,8 +26,7 @@ class Location implements MediaServiceInterface
             $location = $this->search($lat, $lng, $distance);
             $media = array_map(function ($data) {
                 $result = $this->storage->build($data['id'], function ($id) {
-                    $media = $this->fetch($id);
-                    return $media['data'];
+                    return $this->fetch($id);
                 });
                 return $result;
             }, $location);
@@ -41,8 +40,9 @@ class Location implements MediaServiceInterface
     public function fetch($location_id, array $query = [])
     {
         $end_point = sprintf($this->end_points['recent'], $location_id);
+        $media = $this->instagram_provider->get($end_point, $query);
 
-        return $this->instagram_provider->get($end_point, $query);
+        return $media['data'];
     }
 
     public function search($lat, $lng, $distance)
