@@ -1,6 +1,6 @@
 /web/bundles/
 /web/js/bootstrap*
-/web/css/bootstrap*
+/web/css/
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
@@ -14,6 +14,7 @@
 /composer.phar
 /src/AppBundle/Resources/config/webservices_conf.yml
 /src/AppBundle/Resources/public/js/build
+/src/AppBundle/Resources/public/images
 /node_modules
 .buildpacks
 Procfile

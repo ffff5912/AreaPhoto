@@ -7,17 +7,23 @@ var MediaStore = (function() {
 
     MediaStore.prototype.find = function(data) {
         var self = this;
-        data.query = {
-            lat: data.latLng.lat(),
-            lng: data.latLng.lng(),
-        };
+        self.setLoading = data.setLoading;
+        self.setLoading(true);
         $.ajax({
             url: self.url,
             type: 'GET',
             beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', self.token);},
-            data: data.query,
+            data: {
+                lat: data.latLng.lat(),
+                lng: data.latLng.lng(),
+            },
             success: function(response) {
                 data.callback(response);
+            },
+            error: function(data) {
+            },
+            complete: function(data) {
+                self.setLoading(false);
             }
         });
     };

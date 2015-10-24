@@ -11,6 +11,7 @@ var Map = (function() {
         this.action = action;
         this.media_store = media_store;
         this.media = [];
+        this.loading = false;
     }
 
     Map.prototype.onLoad = function() {
@@ -30,11 +31,16 @@ var Map = (function() {
 
     Map.prototype.onClick = function(data) {
         data.callback = this.setMedia;
+        data.setLoading = this.setLoading;
         this.action.fetch(data);
     };
 
     Map.prototype.setMedia = function(data) {
         this.media = data;
+    };
+
+    Map.prototype.setLoading = function (data) {
+        this.loading = data;
     };
 
     return Map;
