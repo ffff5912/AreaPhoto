@@ -20,17 +20,23 @@ var Location = (function(){
 })();
 
 var Area = React.createClass({
-    extract: function (media) {
+    data: {},
+    extract: function(media) {
         return media.filter(hasValues).map(createLocation(Location));
     },
+    _onClick: function(e) {
+        var id = React.findDOMNode(this.refs.location_id).value;
+        this.props.findByLocationId(id);
+    },
     render: function () {
+        var self = this;
         var rows = this.extract(this.props.media).map(function(location) {
             return (
-                <p>{location.name}</p>
-            )
+                <button className="btn btn-default" value={location.id} onClick={self._onClick} ref="location_id">{location.name}</button>
+            );
         });
         return (
-            <div>
+            <div className="">
                 {rows}
             </div>
         )

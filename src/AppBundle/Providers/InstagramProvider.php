@@ -19,7 +19,7 @@ class InstagramProvider implements ProviderInterface
         $this->client_secret = $config['client_secret'];
     }
 
-    public function get($end_point, array $query)
+    public function get($end_point, array $query = [])
     {
         $query['query']['access_token'] = $this->access_token;
         $request = $this->client->get($end_point, [], $query);

@@ -7,6 +7,11 @@ var Action = (function() {
         this.dispatcher.emit('fetch', data);
     };
 
+    Action.prototype.findByLocationId = function(id, setMedia, setLoading) {
+        var data = {id: id, callback: setMedia, setLoading: setLoading};
+        this.dispatcher.emit('findByLocationId', data);
+    };
+
     return Action;
 })();
 

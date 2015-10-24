@@ -39,11 +39,14 @@ var Main = React.createClass({
             loading: loading
         });
     },
+    findByLocationId: function(id) {
+        action.findByLocationId(id, this.setMedia, this.setLoading);
+    },
     render: function() {
         return (
             <div>
                 <Loading loading={this.state.loading} />
-                <Area media={this.state.media} setMedia={this.setMedia}/>
+                <Area media={this.state.media} findByLocationId={this.findByLocationId}/>
                 <Media media={this.state.media} />
             </div>
         );
