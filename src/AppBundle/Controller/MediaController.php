@@ -43,6 +43,27 @@ class MediaController extends FOSRestController implements ClassResourceInterfac
         return $this->handleView($view);
     }
 
+    public function getLocationRecentAction(Request $request)
+    {
+        $location = new Location();
+        $form = $this->get('form.factory')->createNamed('', new LocationType(), $location, [
+                'method' => 'GET', 'csrf_protection' => false, 'validation_groups' => 'location'
+            ]
+        );
+        $form->handleRequest($request);
+        if (!$form->isValid()) {
+            return $form;
+        }
+        $location_service = $this->get('app.service.location');
+        $media = $location_service->fetch($location->getId());
+        if (0 === count($media)) {
+            throw new NotFoundHttpException(sprintf('The resource location_id:\'%s\'  was not found.', $location->getId()));
+        }
+        $view = $this->view($media, 200, $this->getResponseHeader());
+
+        return $this->handleView($view);
+    }
+
     /**
      * Returns the headers.
      *

@@ -18,7 +18,8 @@ class Location
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @Assert\NotBlank(groups="location")
+     * @Assert\Regex(pattern="/\A[0-9]+\Z/u", groups="location")
      */
     private $id;
 
@@ -39,6 +40,16 @@ class Location
      * @Assert\Regex("/\A([0-9])+\.*([0-9])*\Z/u")
      */
     private $lng;
+
+    /**
+     * Set id
+     *
+     * @return integer
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * Get id
