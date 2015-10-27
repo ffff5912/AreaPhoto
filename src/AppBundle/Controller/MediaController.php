@@ -27,7 +27,8 @@ class MediaController extends FOSRestController implements ClassResourceInterfac
     public function getLocationAction(Request $request)
     {
         $location = new Location();
-        $form = $this->get('form.factory')->createNamed('', new LocationType(), $location, ['method' => 'GET', 'csrf_protection' => false]);
+        $form = $this->get('app.form.location');
+        $form->setData($location);
         $form->handleRequest($request);
         if (!$form->isValid()) {
             return $form;
@@ -46,10 +47,8 @@ class MediaController extends FOSRestController implements ClassResourceInterfac
     public function getLocationRecentAction(Request $request)
     {
         $location = new Location();
-        $form = $this->get('form.factory')->createNamed('', new LocationType(), $location, [
-                'method' => 'GET', 'csrf_protection' => false, 'validation_groups' => 'location'
-            ]
-        );
+        $form = $this->get('app.form.location.recent');
+        $form->setData($location);
         $form->handleRequest($request);
         if (!$form->isValid()) {
             return $form;

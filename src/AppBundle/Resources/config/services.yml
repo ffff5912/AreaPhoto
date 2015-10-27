@@ -2,6 +2,9 @@ imports:
     - { resource: webservices_conf.yml }
     - { resource: end_points.yml }
 
+parameters:
+    location.entity.class: AppBundle\Entity\Location
+
 services:
     client:
         class: Guzzle\Http\Client
@@ -30,3 +33,25 @@ services:
         arguments: [ @form.csrf_provider ]
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+    app.form.location:
+        factory_method: createNamed
+        factory_service: form.factory
+        class: Symfony\Form\Form
+        arguments:
+            - null
+            - appbundle_location
+            - null
+            - {'method': 'GET', 'csrf_protection': false}
+    app.form.location.recent:
+        factory_method: createNamed
+        factory_service: form.factory
+        class: Symfony\Form\Form
+        arguments:
+            - null
+            - appbundle_location
+            - null
+            - {'method': 'GET', 'csrf_protection': false, 'validation_groups': 'location'}
+    app.form.type.location:
+        class: AppBundle\Form\LocationType
+        tags:
+        - {name: form.type, alias: appbundle_location}
