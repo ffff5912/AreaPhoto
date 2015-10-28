@@ -33,25 +33,39 @@ services:
         arguments: [ @form.csrf_provider ]
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+    app.form.factory:
+        class: AppBundle\Form\FormFactory
+        arguments: [ @form.factory ]
     app.form.location:
-        factory_method: createNamed
-        factory_service: form.factory
-        class: Symfony\Form\Form
+        class: AppBundle\Form\Location
+        factory_service: app.form.factory
+        factory_method: createLocationForm
         arguments:
-            - null
             - appbundle_location
             - null
             - {'method': 'GET', 'csrf_protection': false}
     app.form.location.recent:
-        factory_method: createNamed
-        factory_service: form.factory
-        class: Symfony\Form\Form
+        class: AppBundle\Form\Location
+        factory_service: app.form.factory
+        factory_method: createLocationForm
         arguments:
-            - null
             - appbundle_location
             - null
             - {'method': 'GET', 'csrf_protection': false, 'validation_groups': 'location'}
+
+    #app.form.location.class:
+    #    factory_method: createNamed
+    #    factory_service: form.factory
+    #    class: Symfony\Form\Form
+    #    arguments:
+    #        - null
+    #        - appbundle_location
+    #        - null
+    #        - {'method': 'GET', 'csrf_protection': false}
     app.form.type.location:
-        class: AppBundle\Form\LocationType
+        class: AppBundle\Form\Type\LocationType
         tags:
         - {name: form.type, alias: appbundle_location}
+    #app.form.location:
+    #    class: AppBundle\Form\Location
+    #    arguments: [ @app.form.location.class ]
