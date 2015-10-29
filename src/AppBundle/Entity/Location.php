@@ -18,8 +18,8 @@ class Location
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @Assert\NotBlank(groups="location")
-     * @Assert\Regex(pattern="/\A[0-9]+\Z/u", groups="location")
+     * @Assert\NotBlank(groups="location_recent")
+     * @Assert\Regex(pattern="/\A[0-9]+\Z/u", groups="location_recent")
      */
     private $id;
 

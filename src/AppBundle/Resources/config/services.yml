@@ -51,21 +51,8 @@ services:
         arguments:
             - appbundle_location
             - null
-            - {'method': 'GET', 'csrf_protection': false, 'validation_groups': 'location'}
-
-    #app.form.location.class:
-    #    factory_method: createNamed
-    #    factory_service: form.factory
-    #    class: Symfony\Form\Form
-    #    arguments:
-    #        - null
-    #        - appbundle_location
-    #        - null
-    #        - {'method': 'GET', 'csrf_protection': false}
+            - {'method': 'GET', 'csrf_protection': false, 'validation_groups': 'location_recent'}
     app.form.type.location:
         class: AppBundle\Form\Type\LocationType
         tags:
         - {name: form.type, alias: appbundle_location}
-    #app.form.location:
-    #    class: AppBundle\Form\Location
-    #    arguments: [ @app.form.location.class ]
