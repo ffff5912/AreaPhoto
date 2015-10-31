@@ -3,7 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Form\Form;
+use Symfony\Component\Form\Form;
 
 interface MediaFormInterface
 {

@@ -3,7 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Form\Form;
+use Symfony\Component\Form\Form;
 use AppBundle\Entity\Location;
 
 class LocationForm implements MediaFormInterface
@@ -15,7 +15,7 @@ class LocationForm implements MediaFormInterface
     public function __construct(Form $form)
     {
         $this->form = $form;
-        $location = new Location();
+        $this->location = new Location();
     }
 
     public function process(Request $request)
