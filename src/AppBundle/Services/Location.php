@@ -23,7 +23,10 @@ class Location implements MediaServiceInterface
     public function execute($lat, $lng, $distance = 100)
     {
         try {
-            $location = $this->search($lat, $lng, $distance);
+            $location = $this->storage->build($lat, $lag);
+            if (is_null($location)) {
+                $location = $this->search($lat, $lng, $distance);
+            }
             $media = array_map(function ($data) {
                 $result = $this->storage->build($data['id'], function ($id) {
                     return $this->fetch($id);
