@@ -22,10 +22,10 @@ class Location implements StorageInterface
             return json_decode($data, true);
         }
 
-        return null;
+        return $action($lat, $lng);
     }
 
-    public function set($lat, $lng, $location)
+    public function set($lat, $lng, $location, $expire = 300)
     {
         $id = $lat . $lng;
         $this->redis->setex($id, $expire, json_encode($location));

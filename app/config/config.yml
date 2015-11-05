@@ -44,7 +44,7 @@ assetic:
     #java: /usr/bin/java
     filters:
         less:
-            #node: /usr/bin/node
+            node: /usr/bin/node
             node_paths:
                 - "%kernel.root_dir%/../node_modules"
                 - "/usr/lib/node_modules"
@@ -118,7 +118,7 @@ snc_redis:
             alias: default
             dsn:
                 - redis://localhost?alias=master
-                - redis://localhost:16379?alias=slave1
+                #- redis://localhost:16379?alias=slave1
             options:
                 replication: true
     #    doctrine:

@@ -12,6 +12,12 @@ services:
     app.storage.cache.media.class:
         class: AppBundle\Storage\Cache\Media
         arguments: [ @snc_redis.default ]
+    app.storage.cache.location.class:
+        class: AppBundle\Storage\Cache\Location
+        arguments: [ @snc_redis.default ]
+    app.storage.cache.cache_manager:
+        class: AppBundle\Storage\Cache\CacheManager
+        arguments: [ @app.storage.cache.media.class, @app.storage.cache.location.class ]
     app.provider.factory:
         class: AppBundle\Providers\ProviderFactory
         arguments: [ @client ]
@@ -22,7 +28,7 @@ services:
         arguments: [ %instagram% ]
     app.service.location:
         class: AppBundle\Services\Location
-        arguments: [ @app.provider.instagram.class, %location%, @app.storage.cache.media.class ]
+        arguments: [ @app.provider.instagram.class, %location%, @app.storage.cache.cache_manager ]
     app.twig.csrf_twig_extension:
         class: AppBundle\Twig\CsrfTwigExtension
         arguments: [ @form.csrf_provider ]
