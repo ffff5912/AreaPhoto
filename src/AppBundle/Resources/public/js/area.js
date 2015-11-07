@@ -6,7 +6,7 @@ function hasValues(value) {
 
 function createLocation(Location) {
     return function(location) {
-        return new Location(location[0].location.id, location[0].location.name)
+        return new Location(location[0].location.id, location[0].location.name);
     };
 }
 
