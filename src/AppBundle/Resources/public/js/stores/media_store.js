@@ -17,6 +17,7 @@ var MediaStore = (function() {
             data: {
                 lat: data.latLng.lat(),
                 lng: data.latLng.lng(),
+                distance: data.distance,
             },
             success: function(response) {
                 data.callback(response);

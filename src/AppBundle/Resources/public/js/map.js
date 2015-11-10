@@ -4,6 +4,7 @@ var Map = (function() {
         this.media_store = media_store;
         this.media = [];
         this.loading = false;
+        this.distance = 100;
     }
 
     Map.prototype.onLoad = function() {
@@ -24,6 +25,7 @@ var Map = (function() {
     Map.prototype.onClick = function(data) {
         data.callback = this.setMedia;
         data.setLoading = this.setLoading;
+        data.distance = this.distance;
         this.action.fetch(data);
     };
 

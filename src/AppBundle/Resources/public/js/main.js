@@ -3,6 +3,7 @@ var React = require('react');
 var Media = require('./media.js');
 var Area = require('./area.js');
 var Loading = require('./loading.js');
+var DistanceSelect = require('./distance_select.js');
 var EventEmitter = require('./event_emitter.js');
 var MapAction = require('./actions/map_action.js');
 var MediaStore = require('./stores/media_store.js');
@@ -46,6 +47,7 @@ var Main = React.createClass({
         return (
             <div>
                 <Loading loading={this.state.loading} />
+                <DistanceSelect map={this.props.map}/>
                 <Area media={this.state.media} findByLocationId={this.findByLocationId}/>
                 <Media media={this.state.media} />
             </div>
