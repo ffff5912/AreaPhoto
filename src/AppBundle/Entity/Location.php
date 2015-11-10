@@ -42,6 +42,15 @@ class Location
     private $lng;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="distance", type="string", length=10)
+     * @Assert\NotBlank()
+     * @Assert\Regex("/\A([1-5]{1}00)\Z/u")
+     */
+    private $distance;
+
+    /**
      * Set id
      *
      * @return integer
@@ -105,5 +114,28 @@ class Location
     public function getLng()
     {
         return $this->lng;
+    }
+    
+    /**
+     * Set distance
+     *
+     * @param string $distance
+     * @return Location
+     */
+    public function setDistance($distance)
+    {
+        $this->distance = $distance;
+
+        return $this;
+    }
+
+    /**
+     * Get distance
+     *
+     * @return string
+     */
+    public function getDistance()
+    {
+        return $this->distance;
     }
 }

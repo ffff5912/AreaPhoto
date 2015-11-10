@@ -18,7 +18,8 @@ class LocationType extends AbstractType
             ->add('id')
             ->add('lat')
             ->add('lng')
-        ;
+            ->add('distance')
+            ;
     }
 
     /**
