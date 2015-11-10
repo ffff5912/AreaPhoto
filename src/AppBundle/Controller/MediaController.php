@@ -33,7 +33,7 @@ class MediaController extends FOSRestController implements ClassResourceInterfac
 
         $location_service = $this->get('app.service.location');
         $location = $this->get('app.form.location')->getData();
-        $media = $location_service->execute($location->getLat(), $location->getLng());
+        $media = $location_service->execute($location->getLat(), $location->getLng(), $location->getDistance());
         if (0 === count($media)) {
             throw new NotFoundHttpException(sprintf('The resource lat:\'%s\' lng:\'%s\' was not found.', $location->getLat(), $location->getLng()));
         }
