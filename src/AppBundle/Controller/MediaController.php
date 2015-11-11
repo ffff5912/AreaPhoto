@@ -37,7 +37,7 @@ class MediaController extends FOSRestController implements ClassResourceInterfac
         if (0 === count($media)) {
             throw new NotFoundHttpException(sprintf('The resource lat:\'%s\' lng:\'%s\' was not found.', $location->getLat(), $location->getLng()));
         }
-        $view = $this->view($media, 200, $this->getResponseHeader());
+        $view = $this->view($media, Response::HTTP_OK, $this->getResponseHeader());
 
         return $this->handleView($view);
     }
@@ -54,7 +54,7 @@ class MediaController extends FOSRestController implements ClassResourceInterfac
         if (0 === count($media)) {
             throw new NotFoundHttpException(sprintf('The resource location_id:\'%s\'  was not found.', $location->getId()));
         }
-        $view = $this->view($media, 200, $this->getResponseHeader());
+        $view = $this->view($media, Response::HTTP_OK, $this->getResponseHeader());
 
         return $this->handleView($view);
     }
