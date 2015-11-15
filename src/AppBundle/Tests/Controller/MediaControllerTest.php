@@ -18,7 +18,7 @@ class MediaControllerTest extends WebTestCase
 
     public function testLocationActionSuccess()
     {
-        $query = ['lat' => '35.79390245637972', 'lng' => '139.80063915252686'];
+        $query = ['lat' => '35.79390245637972', 'lng' => '139.80063915252686', 'distance' => '100'];
         $location_id = '514553024';
         $crawler = $this->client->request(
             'GET',
@@ -40,7 +40,7 @@ class MediaControllerTest extends WebTestCase
 
     public function testLocationActionValidError()
     {
-        $query = ['lat' => '35.7939024563797a', 'lng' => '139.800639152526b'];
+        $query = ['lat' => '35.7939024563797a', 'lng' => '139.800639152526b', 'distance' => '100'];
         $crawler = $this->client->request(
             'GET',
             '/media/location',
@@ -58,7 +58,7 @@ class MediaControllerTest extends WebTestCase
 
     public function testLocationActionCsrfTokenValid()
     {
-        $query = ['lat' => '35.79390245637970', 'lng' => '139.800639152526b'];
+        $query = ['lat' => '35.79390245637970', 'lng' => '139.800639152526b', 'distance' => '100'];
         $this->header['HTTP_X-CSRF-Token'] = '0000000001';
         $crawler = $this->client->request(
             'GET',
@@ -78,7 +78,7 @@ class MediaControllerTest extends WebTestCase
 
     public function testLocationActionNotFound()
     {
-        $query = ['lat' => '35.79995912279198', 'lng' => '139.7947597503662'];
+        $query = ['lat' => '35.79995912279198', 'lng' => '139.7947597503662', 'distance' => '100'];
         $crawler = $this->client->request(
             'GET',
             '/media/location',
