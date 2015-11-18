@@ -6,6 +6,9 @@ parameters:
     location.entity.class: AppBundle\Entity\Location
 
 services:
+    app.media_controller:
+        class: AppBundle\Controller\MediaController
+        arguments: [ @app.form.location, @app.service.location ]
     client:
         class: Guzzle\Http\Client
         arguments: []
@@ -43,7 +46,7 @@ services:
         class: AppBundle\Form\FormFactory
         arguments: [ @form.factory ]
     app.form.location:
-        class: AppBundle\Form\Location
+        class: AppBundle\Form\LocationForm
         factory_service: app.form.factory
         factory_method: createLocationForm
         arguments:
