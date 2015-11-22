@@ -85,7 +85,7 @@
                 "env-map": {}
             },
             {
-                "file": "src/AppBundle/Resources/config/webservices_conf.yml",
+                "file": "src/AreaPhoto/AppBundle/Resources/config/webservices_conf.yml",
                 "env-map": {
                     "access_token": "API_ACCESS_TOKEN",
                     "client_id": "API_CLIENT_ID",

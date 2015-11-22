@@ -1,0 +1,67 @@
+imports:
+    - { resource: webservices_conf.yml }
+    - { resource: end_points.yml }
+
+parameters:
+    location.entity.class: AreaPhoto\AppBundle\Entity\Location
+
+services:
+    app.media_controller:
+        class: AreaPhoto\AppBundle\Controller\MediaController
+        arguments: [ @app.form.location, @app.service.location ]
+    client:
+        class: Guzzle\Http\Client
+        arguments: []
+    app.storage.cache.media.class:
+        class: AreaPhoto\AppBundle\Storage\Cache\Media
+        arguments: [ @snc_redis.default ]
+    app.storage.cache.location.class:
+        class: AreaPhoto\AppBundle\Storage\Cache\Location
+        arguments: [ @snc_redis.default ]
+    app.storage.cache.cache_manager:
+        class: AreaPhoto\AppBundle\Storage\Cache\CacheManager
+        arguments: [ @app.storage.cache.media.class, @app.storage.cache.location.class ]
+    app.provider.factory:
+        class: AreaPhoto\AppBundle\Providers\ProviderFactory
+        arguments: [ @client ]
+    app.provider.instagram.class:
+        class: AreaPhoto\AppBundle\Providers\InstagramProvider
+        factory_service: app.provider.factory
+        factory_method: createInstagramProvider
+        arguments: [ %instagram% ]
+    app.service.location:
+        class: AreaPhoto\AppBundle\Services\Location
+        arguments: [ @app.provider.instagram.class, %location%, @app.storage.cache.cache_manager ]
+    app.twig.csrf_twig_extension:
+        class: AreaPhoto\AppBundle\Twig\CsrfTwigExtension
+        arguments: [ @form.csrf_provider ]
+        tags:
+            - { name: twig.extension }
+    app.event_listener.token_listener:
+        class: AreaPhoto\AppBundle\EventListener\TokenListener
+        arguments: [ @form.csrf_provider ]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+    app.form.factory:
+        class: AreaPhoto\AppBundle\Form\FormFactory
+        arguments: [ @form.factory ]
+    app.form.location:
+        class: AreaPhoto\AppBundle\Form\LocationForm
+        factory_service: app.form.factory
+        factory_method: createLocationForm
+        arguments:
+            - appbundle_location
+            - null
+            - {'method': 'GET', 'csrf_protection': false}
+    app.form.location.recent:
+        class: AreaPhoto\AppBundle\Form\Location
+        factory_service: app.form.factory
+        factory_method: createLocationForm
+        arguments:
+            - appbundle_location
+            - null
+            - {'method': 'GET', 'csrf_protection': false, 'validation_groups': 'location_recent'}
+    app.form.type.location:
+        class: AreaPhoto\AppBundle\Form\Type\LocationType
+        tags:
+        - {name: form.type, alias: appbundle_location}

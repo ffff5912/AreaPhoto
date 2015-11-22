@@ -12,9 +12,9 @@
 /vendor/
 /bin/
 /composer.phar
-/src/AppBundle/Resources/config/webservices_conf.yml
-/src/AppBundle/Resources/public/js/build
-/src/AppBundle/Resources/public/images
+/src/AreaPhoto/AppBundle/Resources/config/webservices_conf.yml
+/src/AreaPhoto/AppBundle/Resources/public/js/build
+/src/AreaPhoto/AppBundle/Resources/public/images
 /node_modules
 .buildpacks
 Procfile
