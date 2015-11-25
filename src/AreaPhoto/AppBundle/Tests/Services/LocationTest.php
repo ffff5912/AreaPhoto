@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LocationTest extends WebTestCase
 {
-    protected static $media_schema;
+    public static $media_schema;
 
     public static function setUpBeforeClass()
     {
