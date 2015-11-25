@@ -35,6 +35,9 @@ services:
     app.service.popular:
         class: AreaPhoto\AppBundle\Services\Popular
         arguments: [ @app.provider.instagram.class, %popular%, @app.storage.cache.cache_manager ]
+    app.service.tag:
+        class: AreaPhoto\AppBundle\Services\Tag
+        arguments: [ @app.provider.instagram.class, %tags%, @app.storage.cache.cache_manager ]
     app.twig.csrf_twig_extension:
         class: AreaPhoto\AppBundle\Twig\CsrfTwigExtension
         arguments: [ @form.csrf_provider ]

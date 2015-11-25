@@ -3,3 +3,6 @@ parameters:
         recent: https://api.instagram.com/v1/locations/%s/media/recent
         search: https://api.instagram.com/v1/locations/search
     popular: https://api.instagram.com/v1/media/popular
+    tags:
+        recent: https://api.instagram.com/v1/tags/%s/media/recent
+        search: https://api.instagram.com/v1/tags/search
