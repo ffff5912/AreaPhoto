@@ -9,6 +9,9 @@ services:
     app.media.location_controller:
         class: AreaPhoto\AppBundle\Controller\Media\LocationController
         arguments: [ @app.form.location, @app.service.location ]
+    app.media.popular_controller:
+        class: AreaPhoto\AppBundle\Controller\Media\PopularController
+        arguments: [ @app.service.popular ]
     client:
         class: Guzzle\Http\Client
         arguments: []

@@ -4,3 +4,6 @@ app_homepage:
 location:
     resource: app.media.location_controller
     type: rest
+popular:
+    resource: app.media.popular_controller
+    type: rest
