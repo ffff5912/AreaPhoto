@@ -45,7 +45,6 @@ class LocationController extends FOSRestController implements ClassResourceInter
 
     /**
      * @param Request $request
-     *
      * @return json|NotFoundHttpException
      */
     public function getAction(Request $request)
@@ -66,7 +65,6 @@ class LocationController extends FOSRestController implements ClassResourceInter
 
     /**
      * @param Request $request
-     *
      * @return json|NotFoundHttpException
      */
     public function getRecentAction(Request $request)
