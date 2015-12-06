@@ -21,7 +21,7 @@
 
 {% block javascripts %}
     <script>
-        var media_store_url = "{{ path('get_media_location') }}";
+        var media_store_url = "{{ path('get_location') }}";
         var token = "{{ default_csrf_token() }}";
     </script>
     <script src="{{ asset('js/jquery.js') }}"></script>

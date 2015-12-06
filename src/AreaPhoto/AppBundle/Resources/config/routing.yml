@@ -1,6 +1,6 @@
 app_homepage:
     path:     /
     defaults: { _controller: AppBundle:Default:index }
-media:
-    resource: app.media_controller
+location:
+    resource: app.media.location_controller
     type: rest

@@ -1,6 +1,6 @@
 <?php
 
-namespace AreaPhoto\AppBundle\Controller;
+namespace AreaPhoto\AppBundle\Controller\Media;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,14 +11,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use AreaPhoto\AppBundle\Form\MediaFormInterface;
 use AreaPhoto\AppBundle\Services\MediaServiceInterface;
 use AreaPhoto\AppBundle\Traits\ResponseTrait;
+use AreaPhoto\AppBundle\Controller\TokenAuthenticatedController;
 
 /**
  * @Cache(maxage="86400")
  */
-
-class MediaController extends FOSRestController implements ClassResourceInterface, TokenAuthenticatedController
+class LocationController extends FOSRestController implements ClassResourceInterface, TokenAuthenticatedController
 {
-    /**
+    /*
      * @var Traits\ResponseTrait
      */
     use ResponseTrait;
@@ -34,7 +34,6 @@ class MediaController extends FOSRestController implements ClassResourceInterfac
     private $media_service;
 
     /**
-     *
      * @param MediaFormInterface    $form
      * @param MediaServiceInterface $media_service
      */
@@ -45,11 +44,11 @@ class MediaController extends FOSRestController implements ClassResourceInterfac
     }
 
     /**
+     * @param Request $request
      *
-     * @param  Request $request
      * @return json|NotFoundHttpException
      */
-    public function getLocationAction(Request $request)
+    public function getAction(Request $request)
     {
         $form = $this->form->process($request);
         if (!$form->isValid()) {
@@ -66,11 +65,11 @@ class MediaController extends FOSRestController implements ClassResourceInterfac
     }
 
     /**
+     * @param Request $request
      *
-     * @param  Request $request
      * @return json|NotFoundHttpException
      */
-    public function getLocationRecentAction(Request $request)
+    public function getRecentAction(Request $request)
     {
         $form = $this->form->process($request);
         if (!$form->isValid()) {

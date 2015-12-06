@@ -6,8 +6,8 @@ parameters:
     location.entity.class: AreaPhoto\AppBundle\Entity\Location
 
 services:
-    app.media_controller:
-        class: AreaPhoto\AppBundle\Controller\MediaController
+    app.media.location_controller:
+        class: AreaPhoto\AppBundle\Controller\Media\LocationController
         arguments: [ @app.form.location, @app.service.location ]
     client:
         class: Guzzle\Http\Client
