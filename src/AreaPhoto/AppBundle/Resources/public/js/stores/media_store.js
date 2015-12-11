@@ -4,6 +4,7 @@ var MediaStore = (function() {
         this.token = '';
         dispatcher.on('fetch', this.find.bind(this));
         dispatcher.on('findByLocationId', this.findByLocationId.bind(this));
+        dispatcher.on('findByPopular', this.findByPopular.bind(this));
     }
 
     MediaStore.prototype.find = function(data) {
@@ -48,6 +49,22 @@ var MediaStore = (function() {
             },
             complete: function(data) {
                 self.setLoading(false);
+            }
+        });
+    };
+
+    MediaStore.prototype.findByPopular = function(action) {
+        var self = this;
+        $.ajax({
+            url: self.url,
+            type: 'GET',
+            beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', self.token);},
+            data: {},
+            success: function(response) {
+                action(response);
+            },
+            error: function() {
+
             }
         });
     };
