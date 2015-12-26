@@ -12,6 +12,9 @@ services:
     app.media.popular_controller:
         class: AreaPhoto\AppBundle\Controller\Media\PopularController
         arguments: [ @app.service.popular ]
+    app.media.tag_controller:
+        class: AreaPhoto\AppBundle\Controller\Media\TagController
+        arguments: [ @app.service.tag ]
     client:
         class: Guzzle\Http\Client
         arguments: []
